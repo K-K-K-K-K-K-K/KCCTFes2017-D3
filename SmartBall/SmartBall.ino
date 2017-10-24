@@ -14,7 +14,11 @@ void loop() {
       digitalWrite(LED_BUILTIN, HIGH);
       delay(100);
       digitalWrite(LED_BUILTIN, LOW);
-      delay(800);
+      delay(100);
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(100);
+      digitalWrite(LED_BUILTIN, LOW);
+      delay(1000);
     } // to debug
   } else {
     digitalWrite(5, LOW);
