@@ -22,10 +22,9 @@ void loop() {
     } // to debug
   } else {
     digitalWrite(5, LOW);
-    digitalWrite(7, LOW);
+//    digitalWrite(7, LOW);
     digitalWrite(LED_BUILTIN, HIGH); // debug
     while (digitalRead(2) == HIGH);
   }
 }
-
 
