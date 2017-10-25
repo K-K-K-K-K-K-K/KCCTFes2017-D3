@@ -1,11 +1,11 @@
-const int tgrsw        = 0;
+const int tgrsw        = 2;
 
-const int elemgt1A  = 1;
-const int elemgt1B  = 2;
-const int led1           = 3;
+const int elemgt1A  = 3;
+const int elemgt1B  = 4;
+const int led1           = 5;
 
-const int elemgt2A  = 4;
-const int elemgt2B  = 5;
+const int elemgt2A  = 7;
+const int elemgt2B  = 8;
 const int led2           = 6;
 
 void setup() {
@@ -13,57 +13,66 @@ void setup() {
 
   pinMode(elemgt1A, OUTPUT);
   pinMode(elemgt1B, OUTPUT);
-  //pinMode(led1, OUTPUT);
+  pinMode(led1, OUTPUT);
 
-  //pinMode(elemgt2A, OUTPUT);
-  //pinMode(elemgt2B, OUTPUT);
-  //pinMode(led2, OUTPUT);
+  pinMode(elemgt2A, OUTPUT);
+  pinMode(elemgt2B, OUTPUT);
+  pinMode(led2, OUTPUT);
 
-  pinMode(LED_BUILTIN, OUTPUT); // debug
+  Serial.begin(9600);
 }
 
 void loop() {
   if (digitalRead(tgrsw) == LOW) {
+      Serial.println("----- Normal-Mode ----------");
     while (digitalRead(tgrsw) == LOW) {
       module1(true);
       module2(false);
-      digitalWrite(LED_BUILTIN, HIGH); // debug
-      delay(3000);
+      Serial.print("module1: ON, module2: OFF - ");
+      Serial.println(millis());
+      delay(1000);
       module1(false);
-      module1(true);
-      digitalWrite(LED_BUILTIN, LOW); // debug
-      delay(3000);
+      module2(true);
+      Serial.print("module1: OFF, module2: ON - ");
+      Serial.println(millis());
+      delay(1000);
     }
   } else {
+    Serial.println("----- Emergency-Mode ----------");
     xseq();
-    digitalWrite(LED_BUILTIN, HIGH); // debug
     while (digitalRead(tgrsw) == HIGH) {
-      //digitalWrite(led1, HIGH);
-      //digitalWrite(led2, LOW);
-      delay(3000);
-      //digitalWrite(led1, LOW);
-      //digitalWrite(led2, HIGH);
-      delay(3000);
+      led(true);
+      Serial.print("LED1: ON, LED2: OFF - ");
+      Serial.println(millis());
+      delay(1000);
+      led(false);
+      Serial.print("LED1: OFF, LED2: ON - ");
+      Serial.println(millis());
+      delay(1000);
     }
   }
 }
-
 void module1(bool b) {
       digitalWrite(elemgt1A, b ? HIGH : LOW);
       digitalWrite(elemgt1B, b ? HIGH : LOW);
-//      digitalWrite(led1, b ? HIGH : LOW);
+      digitalWrite(led1, b ? HIGH : LOW);
 }
 
 void module2(bool b) {
-//      digitalWrite(elemgt2A, b ? HIGH : LOW);
-//      digitalWrite(elemgt2B, b ? HIGH : LOW);
-//      digitalWrite(led2, b ? HIGH : LOW);
+      digitalWrite(elemgt2A, b ? HIGH : LOW);
+      digitalWrite(elemgt2B, b ? HIGH : LOW);
+      digitalWrite(led2, b ? HIGH : LOW);
 }
 
 void xseq() {
       digitalWrite(elemgt1A, HIGH);
       digitalWrite(elemgt1B, HIGH);
-//      digitalWrite(elemgt2A, HIGH);
-//      digitalWrite(elemgt2B, HIGH);
+      digitalWrite(elemgt2A, HIGH);
+      digitalWrite(elemgt2B, HIGH);
+}
+
+void led(bool b) {
+  digitalWrite(led1, b ? HIGH : LOW);
+  digitalWrite(led2, !b ? HIGH : LOW);
 }
 
