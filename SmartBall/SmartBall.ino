@@ -16,7 +16,7 @@ const int led2           = 6;
 ThreadController control = ThreadController();
 Thread mainTh = Thread();
 
-void setup() {https://github.com/kcct-dk/KCCTFes2017-D3/branches/all
+void setup() {
   pinMode(tgrsw, INPUT);
 
   pinMode(elemgt1A, OUTPUT);
