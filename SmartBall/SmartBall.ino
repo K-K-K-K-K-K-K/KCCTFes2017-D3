@@ -113,7 +113,7 @@ boolean checkControlModeRequest() {
 void controlMode() {
   module1(false);
   module2(false);
-  Serial.println("--- Controll-Mode ------------");
+  Serial.println("--- Control-Mode ---------------");
   Serial.println("This system is under the computer control now.");
   Serial.println("example: !set {elemgt{1{A | B} | 2{A | B}} | led{1 | 2}} {ON | OFF}");
   Serial.println("         !return");
