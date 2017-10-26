@@ -1,3 +1,7 @@
+#include <Thread.h>
+#include <ThreadController.h>
+
+/* ピン番号の設定 -------------- */
 const int tgrsw        = 2;
 
 const int elemgt1A  = 3;
@@ -7,8 +11,12 @@ const int led1           = 5;
 const int elemgt2A  = 7;
 const int elemgt2B  = 8;
 const int led2           = 6;
+/* ------------------------------------ */
 
-void setup() {
+ThreadController control = ThreadController();
+Thread mainTh = Thread();
+
+void setup() {https://github.com/kcct-dk/KCCTFes2017-D3/branches/all
   pinMode(tgrsw, INPUT);
 
   pinMode(elemgt1A, OUTPUT);
@@ -23,6 +31,13 @@ void setup() {
 }
 
 void loop() {
+  mainTh.onRun(mainFn);
+  mainTh.run();
+  Serial.println("test");
+}
+
+/* main -------------------------------------------------------------------------------------------------------------- */
+void mainFn() {
   if (digitalRead(tgrsw) == LOW) {
       Serial.println("----- Normal-Mode ----------");
     while (digitalRead(tgrsw) == LOW) {
@@ -52,6 +67,7 @@ void loop() {
     }
   }
 }
+
 void module1(bool b) {
       digitalWrite(elemgt1A, b ? HIGH : LOW);
       digitalWrite(elemgt1B, b ? HIGH : LOW);
@@ -75,4 +91,5 @@ void led(bool b) {
   digitalWrite(led1, b ? HIGH : LOW);
   digitalWrite(led2, !b ? HIGH : LOW);
 }
+/* ------------------------------------------------------------------------------------------------------------------- */
 
