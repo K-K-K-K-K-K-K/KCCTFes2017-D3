@@ -62,6 +62,7 @@ void loop() {
       if (checkControlModeRequest()) {
         controlMode();
         Serial.println("----- Emergency-Mode ----------");
+        xseq();
       }
 
       led(false);
@@ -72,6 +73,7 @@ void loop() {
       if (checkControlModeRequest()) {
         controlMode();
         Serial.println("----- Emergency-Mode ----------");
+        xseq();
       }
     }
   }
